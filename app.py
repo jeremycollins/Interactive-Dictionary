@@ -1,8 +1,10 @@
 import json
 from difflib import get_close_matches
 
+# Load the data file
 data = json.load(open("data.json"))
 
+# Lookup input(str) in data file and return either a definition or an error
 def translate(word):
     word = word.lower()
 
@@ -19,6 +21,14 @@ def translate(word):
     else:
         return "Sorry, \"" + word + "\"" + " does not exist in the dictionary."
 
+# Request for user input
 word = input("Enter word: ")
 
-print(translate(word))
+# Print the definition or error message to the CLI
+output = translate(word)
+
+if type(output) == list:
+    for item in output:
+        print(item)
+else:
+    print(output)
